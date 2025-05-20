@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- Add favicon with meaningful alt (via manifest or fallback title) -->
+    <link rel="icon" type="image/svg+xml" href="/CAF_Logo.svg" />
+
+    <!-- Viewport is good -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Optional: Add theme color -->
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Improve accessibility of title -->
+    <title>PAD Chatbot</title>
+
+    <!-- Optional: Set character encoding early -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Optional: ARIA landmarks for assistive tech -->
+    <meta name="application-name" content="PAD Chatbot" />
+
+    <!-- Optional: Add manifest for PWA or screen reader support -->
+    <!-- <link rel="manifest" href="/manifest.webmanifest" /> -->
+  </head>
+  <body>
+    <!-- Landmark role for assistive tech navigation -->
+    <header role="banner" aria-label="PAD Chatbot Header"></header>
+
+    <!-- Main application mount point with ARIA label -->
+    <main
+      id="root"
+      role="main"
+      aria-label="PAD Chatbot Application Root"
+    ></main>
+
+    <!-- Footer landmark -->
+    <footer role="contentinfo" aria-label="PAD Chatbot Footer"></footer>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
