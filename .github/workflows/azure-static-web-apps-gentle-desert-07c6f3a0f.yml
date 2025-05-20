@@ -46,6 +46,14 @@ jobs:
           output_location: "dist" # Built app content directory - optional
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
+        env:
+          VITE_OPENAI_ENDPOINT: ${{ secrets.VITE_OPENAI_ENDPOINT }}
+          VITE_OPENAI_API_KEY: ${{ secrets.VITE_OPENAI_API_KEY }}
+          VITE_OPENAI_API_VERSION: ${{ secrets.VITE_OPENAI_API_VERSION }}
+          VITE_OPENAI_DEPLOYMENT: ${{ secrets.VITE_OPENAI_DEPLOYMENT }}
+          VITE_AI_SEARCH_ENDPOINT: ${{ secrets.VITE_AI_SEARCH_ENDPOINT }}
+          VITE_AI_SEARCH_API_KEY: ${{ secrets.VITE_AI_SEARCH_API_KEY }}
+          VITE_AI_SEARCH_INDEX: ${{ secrets.VITE_AI_SEARCH_INDEX }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
