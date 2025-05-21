@@ -14,48 +14,26 @@ import FAQSection from "./components/FAQSection.jsx";
 
 /**
  * @function App
- * @description The main component of the AI chatbot application.
- * Manages the user input, chat history, and interaction with the chatbot API.
- * @returns {JSX.Element} The rendered App component.
+ * @description The main chatbot interface. Users can type questions, submit them,
+ * and view responses. Also includes an FAQ section and handles all interaction with the AI API.
+ * @returns {JSX.Element} The full chatbot UI.
  */
 function App() {
-  /**
-   * @state {string} question
-   * @description The current value of the user's input question.
-   */
   const [question, setQuestion] = useState("");
+  // Current input from the user.
 
-  /**
-   * @state {Array<object>} qaList
-   * @description An array of question-answer objects representing the chat history.
-   * Each object has the structure: `{ question: string, answer: string, isPending?: boolean, isError?: boolean }`.
-   */
   const [qaList, setQaList] = useState([]);
+  // Stores the full chat history (Q&A pairs).
 
-  /**
-   * @state {boolean} isLoading
-   * @description A boolean indicating whether the chatbot is currently processing a request.
-   */
   const [isLoading, setIsLoading] = useState(false);
+  // Prevents duplicate requests and disables input while loading.
 
-  /**
-   * @constant {React.RefObject<HTMLDivElement>} scrollRef
-   * @description A React ref used to access the chat history container for scrolling.
-   */
   const scrollRef = useRef(null);
+  // Container element for the chat history – used to scroll to latest response.
 
-  /**
-   * @constant {React.RefObject<HTMLDivElement>} latestRef
-   * @description A React ref used to access the latest QA entry to facilitate scrolling.
-   */
   const latestRef = useRef(null);
+  // Points to the latest chat entry so we can smoothly scroll to it.
 
-  /**
-   * @useEffect
-   * @description Scrolls the chat history to the latest message whenever the `qaList` updates.
-   * Uses the `scrollRef` and `latestRef` to calculate the scroll position.
-   * @dependency {Array<object>} qaList - Effect runs when the chat history updates.
-   */
   useEffect(() => {
     if (scrollRef.current && latestRef.current) {
       const containerTop = scrollRef.current.getBoundingClientRect().top;
@@ -66,14 +44,8 @@ function App() {
       });
     }
   }, [qaList]);
+  // Scrolls to the newest message every time qaList changes.
 
-  /**
-   * @function updateLastMessage
-   * @description Updates the last message in the `qaList` with the chatbot's answer or an error.
-   * @param {string} question The original user question.
-   * @param {string} answer The chatbot's response or an error message.
-   * @param {boolean} [isError=false] Indicates if the update is due to an error.
-   */
   const updateLastMessage = (question, answer, isError = false) => {
     setQaList((prev) => {
       const updated = [...prev];
@@ -86,14 +58,8 @@ function App() {
       return updated;
     });
   };
+  // Called after we get the bot's response (or an error).
 
-  /**
-   * @async
-   * @function handleSubmit
-   * @description Handles the submission of the user's question.
-   * Sends the question to the chatbot API and updates the UI accordingly.
-   * @param {React.FormEvent} e The form submit event.
-   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const trimmed = question.trim();
@@ -103,14 +69,14 @@ function App() {
     }
 
     setIsLoading(true);
-    setQuestion("");
+    setQuestion(""); // Clear input
     setQaList((prev) => [
       ...prev,
       { question: trimmed, answer: "", isPending: true },
     ]);
 
     try {
-      const answer = await askChatbot(trimmed);
+      const answer = await askChatbot(trimmed); // Call API
       updateLastMessage(trimmed, answer);
     } catch (err) {
       console.error("Chat error:", err);
@@ -125,11 +91,6 @@ function App() {
     }
   };
 
-  /**
-   * @function handleKeyDown
-   * @description Handles the key down event in the input field to allow submitting with Enter (without Shift).
-   * @param {React.KeyboardEvent<HTMLInputElement>} e The keyboard event.
-   */
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey && !isLoading) {
       handleSubmit(e);
@@ -138,8 +99,10 @@ function App() {
 
   return (
     <div className="text-white font-sans bg-black min-h-screen">
+      {/* Toast messages appear here */}
       <Toaster position="top-center" toastOptions={{ style: TOAST_STYLE }} />
 
+      {/* Main chatbot area */}
       <main className="bg-gradient-to-bl from-indigo-950 to-black py-12 px-4 flex flex-col items-center min-h-screen max-h-screen">
         <h1 className="text-4xl font-bold mb-2 text-center text-white">
           {APP_TITLE}
@@ -148,6 +111,7 @@ function App() {
           {APP_DESCRIPTION}
         </p>
 
+        {/* Form with input and submit button */}
         <form
           onSubmit={handleSubmit}
           className="mt-3 flex w-full max-w-3xl gap-3 px-4"
@@ -157,21 +121,19 @@ function App() {
             onChange={(e) => setQuestion(e.target.value)}
             onKeyDown={handleKeyDown}
             disabled={isLoading}
-            aria-describedby="questionHelp" // Associate input with help text if needed
+            aria-describedby="questionHelp"
           />
           <SubmitButton
             disabled={!question.trim() || isLoading}
             onClick={handleSubmit}
           />
         </form>
-        {/* Optional help text for the input */}
-        {/* <div id="questionHelp" className="text-xs text-indigo-400 mt-1">Press Enter to submit.</div> */}
 
+        {/* Chat history */}
         <div
           ref={scrollRef}
           className="w-full max-w-3xl px-4 mt-6 space-y-6 max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-600"
           aria-live="polite"
-          aria-atomic="false" // Only announce changes within this region
         >
           <ol role="log" aria-label="Chat History" className="space-y-4">
             {qaList.map((entry, i) => (
@@ -186,6 +148,7 @@ function App() {
         </div>
       </main>
 
+      {/* Frequently Asked Questions */}
       <FAQSection items={FAQ_ITEMS} />
     </div>
   );

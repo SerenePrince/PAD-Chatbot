@@ -1,11 +1,7 @@
-/**
- * @function SubmitButton
- * @description A button component used to submit the user's question.
- * @param {object} props - The component's props.
- * @param {function} props.onClick - Callback function triggered when the button is clicked.
- * @param {boolean} props.disabled - If true, the button is disabled.
- * @returns {JSX.Element} The rendered submit button.
- */
+// SubmitButton.jsx
+
+// The button users click to send their question to PAD-Bot.
+
 function SubmitButton({ onClick, disabled }) {
   return (
     <button

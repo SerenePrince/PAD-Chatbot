@@ -1,15 +1,11 @@
 // config.js
-/**
- * @module config
- * @description Configuration settings for Azure OpenAI and Azure AI Search.
- */
+
+// This file sets up connection details for Azure OpenAI and Azure AI Search.
+// These values come from environment variables, which are set securely outside the code.
 
 /**
- * @function getEnv
- * @description Retrieves an environment variable by name.
- * @param {string} name The name of the environment variable.
- * @returns {string} The value of the environment variable.
- * @throws {Error} If the environment variable is not found.
+ * Gets a value from the environment settings.
+ * If the value doesn't exist, it throws an error to help catch misconfigurations early.
  */
 function getEnv(name) {
   const value = import.meta.env[name];
@@ -19,34 +15,18 @@ function getEnv(name) {
   return value;
 }
 
-/**
- * @typedef {object} AzureOpenAIConfig
- * @property {string} endpoint The endpoint URL for Azure OpenAI.
- * @property {string} apiKey The API key for Azure OpenAI.
- * @property {string} apiVersion The API version to use.
- * @property {string} deployment The name of the deployed model.
- * @property {boolean} dangerouslyAllowBrowser Whether to allow browser usage (use with caution).
- */
-
-/** @type {AzureOpenAIConfig} */
+// Settings for connecting to Azure OpenAI
 export const azureOpenAIConfig = {
-  endpoint: getEnv("VITE_OPENAI_ENDPOINT"),
-  apiKey: getEnv("VITE_OPENAI_API_KEY"),
-  apiVersion: getEnv("VITE_OPENAI_API_VERSION"),
-  deployment: getEnv("VITE_OPENAI_DEPLOYMENT"),
-  dangerouslyAllowBrowser: true,
+  endpoint: getEnv("VITE_OPENAI_ENDPOINT"), // The API endpoint
+  apiKey: getEnv("VITE_OPENAI_API_KEY"), // The secret key for access
+  apiVersion: getEnv("VITE_OPENAI_API_VERSION"), // The version of the API to use
+  deployment: getEnv("VITE_OPENAI_DEPLOYMENT"), // The model we've deployed
+  dangerouslyAllowBrowser: true, // Allows use in the browser (only enabled intentionally)
 };
 
-/**
- * @typedef {object} AzureSearchConfig
- * @property {string} endpoint The endpoint URL for Azure AI Search.
- * @property {string} key The API key for Azure AI Search.
- * @property {string} index The name of the search index.
- */
-
-/** @type {AzureSearchConfig} */
+// Settings for connecting to Azure AI Search
 export const azureSearchConfig = {
-  endpoint: getEnv("VITE_AI_SEARCH_ENDPOINT"),
-  key: getEnv("VITE_AI_SEARCH_API_KEY"),
-  index: getEnv("VITE_AI_SEARCH_INDEX"),
+  endpoint: getEnv("VITE_AI_SEARCH_ENDPOINT"), // The search service endpoint
+  key: getEnv("VITE_AI_SEARCH_API_KEY"), // The secret key for search access
+  index: getEnv("VITE_AI_SEARCH_INDEX"), // The name of the index we're querying
 };

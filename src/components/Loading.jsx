@@ -1,10 +1,7 @@
-/**
- * @function Loading
- * @description Renders a simple bouncing dots loading animation.
- * @param {object} props - The component's props.
- * @param {string} props.aria-label - A label for the loading animation for screen readers.
- * @returns {JSX.Element} The loading animation.
- */
+// Loading.jsx
+
+// A simple animated loading indicator (3 bouncing dots).
+
 function Loading({ ariaLabel }) {
   return (
     <div

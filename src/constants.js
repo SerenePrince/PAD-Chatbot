@@ -1,8 +1,13 @@
+// constants.js
+
+// The title of the app
 export const APP_TITLE = "PAD Chatbot";
 
+// A short description of what the app does
 export const APP_DESCRIPTION =
   "Ask about the Project Approval Directive (PAD) and receive fast, accurate answers powered by AI.";
 
+// List of questions and answers shown in the FAQ section
 export const FAQ_ITEMS = [
   {
     question: "What is the PAD document?",
@@ -16,6 +21,7 @@ export const FAQ_ITEMS = [
   },
 ];
 
+// Style settings for popup messages (e.g., background color and text color)
 export const TOAST_STYLE = {
   background: "#1e1b4b",
   color: "#ffffff",

@@ -1,14 +1,7 @@
-/**
- * @function InputField
- * @description A controlled input field for the user to type their questions.
- * @param {object} props - The component's props.
- * @param {string} props.value - The current value of the input field.
- * @param {function} props.onChange - Callback function triggered when the input value changes.
- * @param {function} props.onKeyDown - Callback function triggered when a key is pressed down in the input.
- * @param {boolean} props.disabled - If true, the input field is disabled.
- * @param {string} [props.aria-describedby] - IDs of the elements that describe the input field.
- * @returns {JSX.Element} The rendered input field.
- */
+// InputField.jsx
+
+// A text box where users type their questions.
+
 function InputField({ value, onChange, onKeyDown, disabled, ariaDescribedby }) {
   return (
     <input

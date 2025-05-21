@@ -1,10 +1,7 @@
-/**
- * @function FAQSection
- * @description Renders a section displaying frequently asked questions and their answers.
- * @param {object} props - The component's props.
- * @param {Array<{question: string, answer: string}>} props.items - An array of FAQ items, where each item is an object with a question and an answer.
- * @returns {JSX.Element} The rendered FAQ section.
- */
+// FAQSection.jsx
+
+// Shows a list of frequently asked questions and answers.
+
 function FAQSection({ items }) {
   return (
     <section className="bg-indigo-950 py-12 px-4" aria-labelledby="faq-title">
