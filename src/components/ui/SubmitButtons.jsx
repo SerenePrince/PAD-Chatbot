@@ -19,7 +19,7 @@ function SubmitButton({ onClick, disabled }) {
       aria-label="Submit your question"
       onClick={onClick}
     >
-      Ask PAD-Bot
+      Submit
     </button>
   );
 }

@@ -150,7 +150,7 @@ function App() {
 
         <form
           onSubmit={handleSubmit}
-          className="mt-6 flex w-full max-w-3xl gap-3 px-4"
+          className="mt-3 flex w-full max-w-3xl gap-3 px-4"
         >
           <InputField
             value={question}
