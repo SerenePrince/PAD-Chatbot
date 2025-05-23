@@ -5,14 +5,14 @@
 function Loading({ ariaLabel }) {
   return (
     <div
-      className="flex space-x-1 items-center"
+      className="flex items-center space-x-1"
       role="status"
       aria-label={ariaLabel}
     >
       {[0, 0.2, 0.4].map((delay, i) => (
         <div
           key={i}
-          className="w-2 h-2 rounded-full bg-indigo-300 animate-bounce"
+          className="h-2 w-2 animate-bounce rounded-full bg-indigo-300"
           style={{
             animationDelay: `${delay}s`,
             animationDuration: "0.6s",

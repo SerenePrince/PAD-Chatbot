@@ -4,19 +4,22 @@
 
 function FAQSection({ items }) {
   return (
-    <section className="bg-indigo-950 py-12 px-4" aria-labelledby="faq-title">
-      <div className="max-w-3xl mx-auto">
+    <section className="bg-indigo-50 px-4 py-12" aria-labelledby="faq-title">
+      <div className="mx-auto max-w-3xl">
         <h3
           id="faq-title"
-          className="text-2xl font-bold mb-6 text-center text-white"
+          className="mb-6 text-center text-3xl font-bold text-zinc-800"
         >
           Frequently Asked Questions
         </h3>
-        <ul className="space-y-6 text-indigo-200">
+        <ul className="space-y-6 text-zinc-800">
           {items.map(({ question, answer }, i) => (
-            <li key={i}>
-              <p className="font-semibold">Q: {question}</p>
-              <p className="text-indigo-300 mt-1">A: {answer}</p>
+            <li
+              key={i}
+              className="rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm"
+            >
+              <p className="font-semibold text-zinc-900">{question}</p>
+              <p className="mt-1 text-zinc-800">{answer}</p>
             </li>
           ))}
         </ul>

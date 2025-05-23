@@ -84,7 +84,7 @@ function App() {
       updateLastMessage(
         trimmed,
         "An error occurred while retrieving a response.",
-        true
+        true,
       );
     } finally {
       setIsLoading(false);
@@ -98,24 +98,21 @@ function App() {
   };
 
   return (
-    <div className="text-white font-sans bg-black min-h-screen">
+    <div className="min-h-screen font-sans">
       {/* Toast messages appear here */}
       <Toaster position="top-center" toastOptions={{ style: TOAST_STYLE }} />
 
       {/* Main chatbot area */}
-      <main className="bg-gradient-to-bl from-indigo-950 to-black py-12 px-4 flex flex-col items-center min-h-screen max-h-screen">
-        <h1 className="text-4xl font-bold mb-2 text-center text-white">
+      <main className="flex min-h-screen flex-col items-center space-y-3 bg-zinc-50 px-4 py-6">
+        <h1 className="text-center text-4xl font-bold text-zinc-800">
           {APP_TITLE}
         </h1>
-        <p className="text-md text-indigo-300 text-center max-w-3xl">
+        <p className="text-md max-w-3xl text-center text-zinc-700">
           {APP_DESCRIPTION}
         </p>
 
         {/* Form with input and submit button */}
-        <form
-          onSubmit={handleSubmit}
-          className="mt-3 flex w-full max-w-3xl gap-3 px-4"
-        >
+        <form onSubmit={handleSubmit} className="flex w-full max-w-3xl gap-3">
           <InputField
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
@@ -132,7 +129,7 @@ function App() {
         {/* Chat history */}
         <div
           ref={scrollRef}
-          className="w-full max-w-3xl px-4 mt-6 space-y-6 max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-600"
+          className="scrollbar-thin scrollbar-thumb-indigo-600 max-h-[70vh] w-full max-w-3xl flex-1 space-y-6 overflow-y-auto py-1"
           aria-live="polite"
         >
           <ol role="log" aria-label="Chat History" className="space-y-4">

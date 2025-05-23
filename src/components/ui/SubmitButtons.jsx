@@ -7,10 +7,10 @@ function SubmitButton({ onClick, disabled }) {
     <button
       type="submit"
       disabled={disabled}
-      className={`px-5 py-3 font-semibold rounded-lg transition ${
+      className={`rounded-xl px-5 py-3 font-semibold text-white shadow-sm transition ${
         !disabled
-          ? "bg-indigo-600 hover:bg-indigo-700 cursor-pointer"
-          : "bg-indigo-300 cursor-not-allowed"
+          ? "cursor-pointer bg-indigo-600 hover:bg-indigo-700"
+          : "cursor-not-allowed bg-indigo-300"
       }`}
       aria-label="Submit your question"
       onClick={onClick}

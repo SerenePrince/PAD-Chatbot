@@ -13,29 +13,19 @@ function QAEntry({ entry, entryRef }) {
   return (
     <div
       ref={entryRef}
-      className="p-4 rounded-xl shadow bg-indigo-950 space-y-3 border border-indigo-800"
+      className="space-y-2 rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-800 shadow-sm"
     >
-      <p className="font-semibold text-indigo-100">User: {question}</p>
-      <div
-        className={`p-3 rounded-md text-sm leading-relaxed ${
-          isPending
-            ? "flex justify-center text-indigo-100"
-            : isError
-            ? "bg-red-900 text-red-100"
-            : "bg-indigo-800 text-indigo-100"
-        }`}
-        aria-live={isPending ? "polite" : "off"}
-      >
-        {isPending ? (
+      <p className="font-semibold text-zinc-900">{question}</p>
+
+      {isPending ? (
+        <div className="flex items-center">
           <Loading aria-label="Loading response" />
-        ) : (
-          <>
-            <p className="font-semibold text-indigo-100">PAD-Bot:</p>
-            <Markdown>{answer}</Markdown>
-          </>
-        )}
-        {isError && <p>Error: {answer}</p>}
-      </div>
+        </div>
+      ) : (
+        <Markdown>{answer}</Markdown>
+      )}
+
+      {isError && <p className="text-red-600">Error: {answer}</p>}
     </div>
   );
 }

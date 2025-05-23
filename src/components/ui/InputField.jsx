@@ -11,7 +11,7 @@ function InputField({ value, onChange, onKeyDown, disabled, ariaDescribedby }) {
       value={value}
       onChange={onChange}
       onKeyDown={onKeyDown}
-      className="flex-grow p-3 rounded-lg bg-white text-black ring-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition-all duration-200"
+      className="flex-grow rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-800 shadow-sm transition-all duration-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
       disabled={disabled}
       autoComplete="off"
       aria-label="Question input"
