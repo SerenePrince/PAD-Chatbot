@@ -35,6 +35,9 @@ function App() {
   const latestRef = useRef(null);
   // Points to the latest chat entry so we can smoothly scroll to it.
 
+  const faqRef = useRef(null);
+  // Ref for the FAQ section to scroll to
+
   useEffect(() => {
     if (scrollRef.current && latestRef.current) {
       const containerTop = scrollRef.current.getBoundingClientRect().top;
@@ -46,6 +49,10 @@ function App() {
     }
   }, [qaList]);
   // Scrolls to the newest message every time qaList changes.
+
+  const scrollToFAQ = () => {
+    faqRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const updateLastMessage = (question, answer, isError = false) => {
     setQaList((prev) => {
@@ -104,7 +111,7 @@ function App() {
       <Toaster position="top-center" toastOptions={{ style: TOAST_STYLE }} />
 
       {/* Main chatbot area */}
-      <main className="flex min-h-screen flex-col items-center space-y-3 bg-zinc-50 px-4 py-6">
+      <main className="flex min-h-screen flex-col items-center space-y-3 bg-zinc-50 p-6">
         <div
           className="flex flex-row items-center space-x-3"
           aria-label="App logo and title"
@@ -114,7 +121,7 @@ function App() {
             className="w-20"
             alt="PAD logo" // <- Replace this with a more descriptive alt if needed
           />
-          <h1 className="text-center text-4xl font-semibold text-sky-500">
+          <h1 className="text-center text-4xl font-semibold tracking-wide text-sky-500">
             {APP_TITLE}
           </h1>
         </div>
@@ -122,21 +129,6 @@ function App() {
         <p className="text-md max-w-3xl text-center text-zinc-700">
           {APP_DESCRIPTION}
         </p>
-
-        {/* Form with input and submit button */}
-        <form onSubmit={handleSubmit} className="flex w-full max-w-3xl gap-3">
-          <InputField
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            onKeyDown={handleKeyDown}
-            disabled={isLoading}
-            aria-describedby="questionHelp"
-          />
-          <SubmitButton
-            disabled={!question.trim() || isLoading}
-            onClick={handleSubmit}
-          />
-        </form>
 
         {/* Chat history */}
         <div
@@ -155,10 +147,48 @@ function App() {
             ))}
           </ol>
         </div>
+
+        {/* Form with input and submit button */}
+        <form onSubmit={handleSubmit} className="flex w-full max-w-3xl gap-3">
+          <InputField
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            onKeyDown={handleKeyDown}
+            disabled={isLoading}
+            aria-describedby="questionHelp"
+          />
+          <SubmitButton
+            disabled={!question.trim() || isLoading}
+            onClick={handleSubmit}
+          />
+        </form>
+
+        <button
+          className="cursor-pointer rounded-xl bg-sky-500 px-2 font-semibold text-white shadow-sm transition hover:bg-sky-600"
+          aria-label="Submit your question"
+          onClick={scrollToFAQ}
+        >
+          <svg
+            className="h-6 w-6 transition-transform group-hover:translate-y-1"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>{" "}
+        </button>
       </main>
 
       {/* Frequently Asked Questions */}
-      <FAQSection items={FAQ_ITEMS} />
+      <div ref={faqRef}>
+        <FAQSection items={FAQ_ITEMS} />
+      </div>
     </div>
   );
 }

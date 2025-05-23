@@ -8,7 +8,7 @@ function FAQSection({ items }) {
       <div className="mx-auto max-w-3xl">
         <h3
           id="faq-title"
-          className="mb-6 text-center text-3xl font-semibold text-sky-500"
+          className="mb-6 text-center text-3xl font-semibold tracking-wide text-sky-500"
         >
           Frequently Asked Questions
         </h3>
