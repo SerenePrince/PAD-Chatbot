@@ -101,12 +101,17 @@ function App() {
     <div className="min-h-screen font-sans">
       {/* Toast messages appear here */}
       <Toaster position="top-center" toastOptions={{ style: TOAST_STYLE }} />
+      <img src="" />
 
       {/* Main chatbot area */}
       <main className="flex min-h-screen flex-col items-center space-y-3 bg-zinc-50 px-4 py-6">
-        <h1 className="text-center text-4xl font-bold text-zinc-800">
-          {APP_TITLE}
-        </h1>
+        <span className="flex flex-row items-center space-x-3">
+          <img src="src/assets/PAD_Icon.png" className="w-20" />
+          <h1 className="text-center text-4xl font-semibold text-sky-500">
+            {APP_TITLE}
+          </h1>
+        </span>
+
         <p className="text-md max-w-3xl text-center text-zinc-700">
           {APP_DESCRIPTION}
         </p>
@@ -129,7 +134,7 @@ function App() {
         {/* Chat history */}
         <div
           ref={scrollRef}
-          className="scrollbar-thin scrollbar-thumb-indigo-600 max-h-[70vh] w-full max-w-3xl flex-1 space-y-6 overflow-y-auto py-1"
+          className="scrollbar-thin scrollbar-thumb-sky-600 max-h-[70vh] w-full max-w-3xl flex-1 space-y-6 overflow-y-auto py-1"
           aria-live="polite"
         >
           <ol role="log" aria-label="Chat History" className="space-y-4">

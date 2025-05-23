@@ -10,20 +10,20 @@ export const APP_DESCRIPTION =
 // List of questions and answers shown in the FAQ section
 export const FAQ_ITEMS = [
   {
-    question: "What is the PAD document?",
+    question: "Example question 1:",
     answer:
-      "The PAD provides the direction necessary to meet your obligations under the new Treasury Board policies on managing investments, projects, and programs.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
   {
-    question: "How often is the PAD updated?",
+    question: "Example question 2:",
     answer:
-      "It is reviewed quarterly or following significant project changes.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
 ];
 
 // Style settings for popup messages (e.g., background color and text color)
 export const TOAST_STYLE = {
-  background: "#1e1b4b",
+  background: "#000000",
   color: "#ffffff",
-  border: "1px solid #4f46e5",
+  border: "1px solid #d4d4d8",
 };

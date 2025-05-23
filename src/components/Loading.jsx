@@ -12,7 +12,7 @@ function Loading({ ariaLabel }) {
       {[0, 0.2, 0.4].map((delay, i) => (
         <div
           key={i}
-          className="h-2 w-2 animate-bounce rounded-full bg-indigo-300"
+          className="h-2 w-2 animate-bounce rounded-full bg-sky-300"
           style={{
             animationDelay: `${delay}s`,
             animationDuration: "0.6s",
