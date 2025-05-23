@@ -11,6 +11,7 @@ import InputField from "./components/ui/InputField.jsx";
 import SubmitButton from "./components/ui/SubmitButtons.jsx";
 import QAEntry from "./components/ui/QAEntry.jsx";
 import FAQSection from "./components/FAQSection.jsx";
+import PADLogo from "./assets/PAD_Icon.png";
 
 /**
  * @function App
@@ -101,16 +102,22 @@ function App() {
     <div className="min-h-screen font-sans">
       {/* Toast messages appear here */}
       <Toaster position="top-center" toastOptions={{ style: TOAST_STYLE }} />
-      <img src="" />
 
       {/* Main chatbot area */}
       <main className="flex min-h-screen flex-col items-center space-y-3 bg-zinc-50 px-4 py-6">
-        <span className="flex flex-row items-center space-x-3">
-          <img src="src/assets/PAD_Icon.png" className="w-20" />
+        <div
+          className="flex flex-row items-center space-x-3"
+          aria-label="App logo and title"
+        >
+          <img
+            src={PADLogo}
+            className="w-20"
+            alt="PAD logo" // <- Replace this with a more descriptive alt if needed
+          />
           <h1 className="text-center text-4xl font-semibold text-sky-500">
             {APP_TITLE}
           </h1>
-        </span>
+        </div>
 
         <p className="text-md max-w-3xl text-center text-zinc-700">
           {APP_DESCRIPTION}
