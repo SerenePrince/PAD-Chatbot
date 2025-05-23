@@ -18,7 +18,7 @@ function QAEntry({ entry, entryRef }) {
       <p className="font-semibold text-zinc-900">{question}</p>
 
       {isPending ? (
-        <div className="flex items-center justify-center">
+        <div className="mt-3 flex items-center justify-center">
           <Loading aria-label="Loading response" />
         </div>
       ) : (

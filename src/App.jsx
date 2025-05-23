@@ -133,7 +133,7 @@ function App() {
         {/* Chat history */}
         <div
           ref={scrollRef}
-          className="scrollbar-thin scrollbar-thumb-sky-600 max-h-[70vh] w-full max-w-3xl flex-1 space-y-6 overflow-y-auto py-1"
+          className="scrollbar-thin scrollbar-thumb-sky-600 max-h-[65vh] min-h-[65vh] w-full max-w-3xl flex-1 space-y-6 overflow-y-auto py-1"
           aria-live="polite"
         >
           <ol role="log" aria-label="Chat History" className="space-y-4">
