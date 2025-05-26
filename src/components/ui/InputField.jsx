@@ -7,7 +7,7 @@ function InputField({ value, onChange, onKeyDown, disabled, ariaDescribedby }) {
     <input
       type="text"
       id="questionInput"
-      placeholder="Ask a question..."
+      placeholder="Type your PAD question here..."
       value={value}
       onChange={onChange}
       onKeyDown={onKeyDown}

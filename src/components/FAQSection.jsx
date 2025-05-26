@@ -1,25 +1,25 @@
-// FAQSection.jsx
-
-// Shows a list of frequently asked questions and answers.
-
+// Updated FAQSection.jsx with consistent styling and semantics
 function FAQSection({ items }) {
   return (
-    <section className="bg-sky-50 px-4 py-12" aria-labelledby="faq-title">
+    <section
+      className="rounded-2xl bg-white p-6 shadow-md"
+      aria-labelledby="faq-title"
+    >
       <div className="mx-auto max-w-3xl">
         <h3
           id="faq-title"
-          className="mb-6 text-center text-3xl font-semibold tracking-wide text-sky-500"
+          className="mb-6 text-center text-3xl font-semibold tracking-wide text-sky-600"
         >
           Frequently Asked Questions
         </h3>
-        <ul className="space-y-6 text-zinc-800">
+        <ul className="space-y-4 text-zinc-700">
           {items.map(({ question, answer }, i) => (
             <li
               key={i}
-              className="rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm"
+              className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm transition-colors hover:border-sky-200"
             >
               <p className="font-semibold text-zinc-900">{question}</p>
-              <p className="mt-1 text-zinc-800">{answer}</p>
+              <p className="mt-2 text-zinc-700">{answer}</p>
             </li>
           ))}
         </ul>

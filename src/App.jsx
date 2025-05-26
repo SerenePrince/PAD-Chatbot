@@ -21,34 +21,17 @@ import PADLogo from "./assets/PAD_Icon.png";
  */
 function App() {
   const [question, setQuestion] = useState("");
-  // Current input from the user.
-
   const [qaList, setQaList] = useState([]);
-  // Stores the full chat history (Q&A pairs).
-
   const [isLoading, setIsLoading] = useState(false);
-  // Prevents duplicate requests and disables input while loading.
-
-  const scrollRef = useRef(null);
-  // Container element for the chat history – used to scroll to latest response.
-
   const latestRef = useRef(null);
-  // Points to the latest chat entry so we can smoothly scroll to it.
-
   const faqRef = useRef(null);
-  // Ref for the FAQ section to scroll to
+  const mainRef = useRef(null);
 
   useEffect(() => {
-    if (scrollRef.current && latestRef.current) {
-      const containerTop = scrollRef.current.getBoundingClientRect().top;
-      const entryTop = latestRef.current.getBoundingClientRect().top;
-      scrollRef.current.scrollTo({
-        top: scrollRef.current.scrollTop + (entryTop - containerTop),
-        behavior: "smooth",
-      });
+    if (latestRef.current) {
+      latestRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
   }, [qaList]);
-  // Scrolls to the newest message every time qaList changes.
 
   const scrollToFAQ = () => {
     faqRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -66,7 +49,6 @@ function App() {
       return updated;
     });
   };
-  // Called after we get the bot's response (or an error).
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,14 +59,14 @@ function App() {
     }
 
     setIsLoading(true);
-    setQuestion(""); // Clear input
+    setQuestion("");
     setQaList((prev) => [
       ...prev,
       { question: trimmed, answer: "", isPending: true },
     ]);
 
     try {
-      const answer = await askChatbot(trimmed); // Call API
+      const answer = await askChatbot(trimmed);
       updateLastMessage(trimmed, answer);
     } catch (err) {
       console.error("Chat error:", err);
@@ -106,89 +88,134 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen font-sans">
-      {/* Toast messages appear here */}
+    <div className="flex min-h-screen flex-col items-center gap-12 bg-sky-50 p-6 font-sans">
       <Toaster position="top-center" toastOptions={{ style: TOAST_STYLE }} />
 
-      {/* Main chatbot area */}
-      <main className="flex min-h-screen flex-col items-center space-y-3 bg-zinc-50 p-6">
-        <div
-          className="flex flex-row items-center space-x-3"
-          aria-label="App logo and title"
+      {/* Wrap the main content in an article tag since it's self-contained content */}
+      <article className="w-full">
+        <main
+          ref={mainRef}
+          className={`flex max-w-4xl flex-col items-center rounded-2xl bg-white p-6 shadow-md transition-all duration-500 ${
+            qaList.length === 0 ? "justify-center" : "min-h-[calc(100vh-80px)]"
+          } mx-auto`} // Added mx-auto for better centering
         >
-          <img
-            src={PADLogo}
-            className="w-20"
-            alt="PAD logo" // <- Replace this with a more descriptive alt if needed
-          />
-          <h1 className="text-center text-4xl font-semibold tracking-wide text-sky-500">
-            {APP_TITLE}
-          </h1>
-        </div>
-
-        <p className="text-md max-w-3xl text-center text-zinc-700">
-          {APP_DESCRIPTION}
-        </p>
-
-        {/* Chat history */}
-        <div
-          ref={scrollRef}
-          className="scrollbar-thin scrollbar-thumb-sky-600 max-h-[65vh] min-h-[65vh] w-full max-w-3xl flex-1 space-y-6 overflow-y-auto py-1"
-          aria-live="polite"
-        >
-          <ol role="log" aria-label="Chat History" className="space-y-4">
-            {qaList.map((entry, i) => (
-              <li key={i}>
-                <QAEntry
-                  entry={entry}
-                  entryRef={i === qaList.length - 1 ? latestRef : null}
-                />
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        {/* Form with input and submit button */}
-        <form onSubmit={handleSubmit} className="flex w-full max-w-3xl gap-3">
-          <InputField
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            onKeyDown={handleKeyDown}
-            disabled={isLoading}
-            aria-describedby="questionHelp"
-          />
-          <SubmitButton
-            disabled={!question.trim() || isLoading}
-            onClick={handleSubmit}
-          />
-        </form>
-
-        <button
-          className="cursor-pointer rounded-xl bg-sky-500 px-2 font-semibold text-white shadow-sm transition hover:bg-sky-600"
-          aria-label="Submit your question"
-          onClick={scrollToFAQ}
-        >
-          <svg
-            className="h-6 w-6 transition-transform group-hover:translate-y-1"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+          {/* Header Section - wrapped in header tag */}
+          <header
+            className={`flex flex-col items-center transition-all duration-500 ${
+              qaList.length === 0 ? "mb-8" : "mb-6"
+            }`}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>{" "}
-        </button>
-      </main>
+            <div className="flex flex-row items-center space-x-3">
+              <img
+                src={PADLogo}
+                className="w-16 transition-all duration-500 md:w-20"
+                alt="PAD logo"
+                aria-hidden="true" // Since the text alternative is already in the heading
+              />
+              <h1 className="text-3xl font-semibold tracking-wide text-sky-600 md:text-4xl">
+                {APP_TITLE}
+              </h1>
+            </div>
 
-      {/* Frequently Asked Questions */}
-      <div ref={faqRef}>
+            <p className="mt-3 max-w-2xl text-center text-lg text-zinc-700">
+              {APP_DESCRIPTION}
+            </p>
+          </header>
+
+          {/* Chat history - improved semantics */}
+          <section
+            aria-label="Chat conversation"
+            className={`w-full max-w-3xl transition-all duration-500 ${
+              qaList.length === 0
+                ? "max-h-0 opacity-0"
+                : "mb-6 max-h-[60vh] min-h-[60vh] flex-1 opacity-100"
+            }`}
+          >
+            <ol
+              role="log"
+              className="scrollbar-thin scrollbar-thumb-sky-200 scrollbar-track-transparent max-h-[60vh] space-y-4 overflow-y-auto pr-2"
+            >
+              {qaList.map((entry, i) => (
+                <li key={i}>
+                  <QAEntry
+                    entry={entry}
+                    entryRef={i === qaList.length - 1 ? latestRef : null}
+                  />
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          {/* Input Section - wrapped in a form element */}
+          <form
+            onSubmit={handleSubmit}
+            className={`w-full max-w-3xl transition-all duration-500 ${
+              qaList.length === 0 ? "mt-0" : "mt-auto"
+            }`}
+            aria-label="Chat input form"
+          >
+            <div className="flex w-full gap-3">
+              <InputField
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                onKeyDown={handleKeyDown}
+                disabled={isLoading}
+                aria-describedby="questionHelp"
+              />
+              <SubmitButton
+                disabled={!question.trim() || isLoading}
+                onClick={handleSubmit}
+              />
+            </div>
+
+            <p
+              id="questionHelp"
+              className={`text-center text-sm text-zinc-600 transition-all duration-500 ${
+                qaList.length === 0 ? "mt-4 opacity-100" : "h-0 opacity-0"
+              }`}
+            >
+              <span className="font-semibold">AI-Generated Content</span> —
+              These responses are produced by an AI model that searches the PAD
+              for relevant passages. Always double-check important details in
+              the official PAD document.
+            </p>
+          </form>
+
+          {/* Scroll to FAQ button - moved outside main */}
+          <button
+            className={`mt-6 cursor-pointer rounded-full bg-sky-500 p-2 font-semibold text-white shadow-sm transition-all duration-500 hover:bg-sky-600 focus:outline-none ${
+              qaList.length === 0 ? "hidden" : "visible"
+            }`}
+            aria-label="Scroll to FAQ section"
+            onClick={scrollToFAQ}
+          >
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+        </main>
+      </article>
+
+      {/* FAQ Section - now uses aside since it's related but separate content */}
+      <aside
+        ref={faqRef}
+        aria-label="Frequently asked questions"
+        className="w-full max-w-4xl"
+      >
         <FAQSection items={FAQ_ITEMS} />
-      </div>
+      </aside>
     </div>
   );
 }

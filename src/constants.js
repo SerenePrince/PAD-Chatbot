@@ -4,8 +4,7 @@
 export const APP_TITLE = "PAD Chatbot";
 
 // A short description of what the app does
-export const APP_DESCRIPTION =
-  "Ask about the Project Approval Directive (PAD) and receive fast, accurate answers powered by AI.";
+export const APP_DESCRIPTION = "Ask about the Project Approval Directive (PAD)";
 
 // List of questions and answers shown in the FAQ section
 export const FAQ_ITEMS = [
