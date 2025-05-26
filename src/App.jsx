@@ -96,7 +96,7 @@ function App() {
         <main
           ref={mainRef}
           className={`flex max-w-4xl flex-col items-center rounded-2xl bg-white p-6 shadow-md transition-all duration-500 ${
-            qaList.length === 0 ? "justify-center" : "min-h-[calc(100vh-80px)]"
+            qaList.length === 0 ? "justify-evenly" : "min-h-[calc(100vh-80px)]"
           } mx-auto`} // Added mx-auto for better centering
         >
           {/* Header Section - wrapped in header tag */}
@@ -128,12 +128,12 @@ function App() {
             className={`w-full max-w-3xl transition-all duration-500 ${
               qaList.length === 0
                 ? "max-h-0 opacity-0"
-                : "mb-6 max-h-[60vh] min-h-[60vh] flex-1 opacity-100"
+                : "mb-6 max-h-[55vh] min-h-[55vh] flex-1 opacity-100"
             }`}
           >
             <ol
               role="log"
-              className="scrollbar-thin scrollbar-thumb-sky-200 scrollbar-track-transparent max-h-[60vh] space-y-4 overflow-y-auto pr-2"
+              className="scrollbar-thin scrollbar-thumb-sky-200 scrollbar-track-transparent max-h-[55vh] space-y-4 overflow-y-auto pr-2"
             >
               {qaList.map((entry, i) => (
                 <li key={i}>
@@ -170,9 +170,7 @@ function App() {
 
             <p
               id="questionHelp"
-              className={`text-center text-sm text-zinc-600 transition-all duration-500 ${
-                qaList.length === 0 ? "mt-4 opacity-100" : "h-0 opacity-0"
-              }`}
+              className="mt-4 text-center text-sm text-zinc-600"
             >
               <span className="font-semibold">AI-Generated Content</span> —
               These responses are produced by an AI model that searches the PAD
@@ -183,8 +181,10 @@ function App() {
 
           {/* Scroll to FAQ button - moved outside main */}
           <button
-            className={`mt-6 cursor-pointer rounded-full bg-sky-500 p-2 font-semibold text-white shadow-sm transition-all duration-500 hover:bg-sky-600 focus:outline-none ${
-              qaList.length === 0 ? "hidden" : "visible"
+            className={`${
+              qaList.length === 0
+                ? "h-0 opacity-0"
+                : "mt-6 cursor-pointer rounded-full bg-sky-500 p-2 font-semibold text-white opacity-100 shadow-sm transition-all duration-500 hover:bg-sky-600 focus:outline-none"
             }`}
             aria-label="Scroll to FAQ section"
             onClick={scrollToFAQ}

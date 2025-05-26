@@ -13,7 +13,7 @@ function QAEntry({ entry, entryRef }) {
   return (
     <div
       ref={entryRef}
-      className="space-y-2 rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-800 shadow-sm"
+      className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm transition-colors hover:border-sky-200"
     >
       <p className="font-semibold text-zinc-900">{question}</p>
 
