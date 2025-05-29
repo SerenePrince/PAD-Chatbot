@@ -175,7 +175,7 @@ function App() {
               <span className="font-semibold">AI-Generated Content</span> —
               These responses are produced by an AI model that searches the PAD
               for relevant passages. Always double-check important details in
-              the official PAD document.
+              the official PAD document; if uncertain, rely on the source text.
             </p>
           </form>
 

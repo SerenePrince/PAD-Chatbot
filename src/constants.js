@@ -22,7 +22,7 @@ export const FAQ_ITEMS = [
 
 // Style settings for popup messages (e.g., background color and text color)
 export const TOAST_STYLE = {
-  background: "#000000",
-  color: "#ffffff",
+  background: "#ffffff",
+  color: "#000000",
   border: "1px solid #d4d4d8",
 };
